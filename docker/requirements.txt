@@ -1,0 +1,6 @@
+tmux
+tree
+wget
+curl
+gnupg
+lsb-release

@@ -1,0 +1,11 @@
+*.png
+*.build
+*.install
+
+# Visual Studio Code files
+.vscode
+
+# PyCache
+*.pyc
+startup/.tmuxinator.yml
+startup/frames*
