@@ -1,0 +1,20 @@
+FROM kkhadka343/jazzy-base:latest
+
+ARG USERNAME=turtle
+USER $USERNAME
+
+RUN sudo apt-get update \
+    && sudo apt-get install -y \
+    ros-jazzy-turtlebot3 \
+    ros-jazzy-turtlebot3-gazebo \
+    && sudo rm -rf /var/lib/apt/lists/*
+
+ENV TURTLEBOT3_MODEL=burger
+
+# Add the entrypoint script
+COPY ./docker/entrypoint.sh /entrypoint.sh
+RUN sudo chmod +x /entrypoint.sh
+
+# Set ENTRYPOINT and CMD
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/bin/bash"]

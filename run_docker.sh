@@ -4,7 +4,8 @@ set -e
 
 DOCKERHUB_USER="kkhadka343"
 TAG="latest"
-SERVICE1="ros-jazzy-base"
+SERVICE1="jazzy-base"
+SERVICE2="turtlebot"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 while true; do
@@ -26,13 +27,14 @@ while true; do
         1)            
             echo "Pulling latest image..."        
             echo "==========================================="
-            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml pull
+            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml pull || echo "Failed to pull the image."
             ;;
         2)
             echo
             echo "Building docker image..."
             echo "==========================================="
-            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml build
+            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml build ${SERVICE1}
+            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml build ${SERVICE2}
             ;;
         3)
             echo
@@ -45,7 +47,7 @@ while true; do
 
             echo "Starting turtlebot docker container..."
             echo "==========================================="
-            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml run --remove-orphans ${SERVICE1}
+            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml run --remove-orphans ${SERVICE2}
             ;;
         5)
             echo "Goodbye!"

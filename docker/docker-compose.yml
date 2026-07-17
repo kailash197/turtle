@@ -24,3 +24,30 @@ services:
 
     devices:
       - /dev/dri
+
+  turtlebot:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.turtlebot
+
+    image: kkhadka343/turtlebot:latest
+    container_name: turtlebot
+
+    network_mode: host
+    stdin_open: true
+    tty: true
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/tmp/.docker.xauth
+      - XDG_RUNTIME_DIR=/tmp/runtime-root
+      - TURTLEBOT3_MODEL=burger
+
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+    devices:
+      - /dev/dri
