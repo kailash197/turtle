@@ -4,7 +4,7 @@ set -e
 
 DOCKERHUB_USER="kkhadka343"
 TAG="latest"
-SERVICE="turtle-dev"
+SERVICE1="ros-jazzy-base"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 while true; do
@@ -37,7 +37,7 @@ while true; do
         3)
             echo
             echo "Pushing image to Docker Hub..."
-            docker push ${DOCKERHUB_USER}/${SERVICE}:${TAG}
+            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml push
             ;;        
         4)
             echo
@@ -45,7 +45,7 @@ while true; do
 
             echo "Starting turtlebot docker container..."
             echo "==========================================="
-            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml run --remove-orphans turtle-dev
+            cd ${SCRIPT_DIR} && docker compose -f docker/docker-compose.yml run --remove-orphans ${SERVICE1}
             ;;
         5)
             echo "Goodbye!"

@@ -1,11 +1,11 @@
 services:
-  turtle-dev:
+  jazzy-base:
     build:
       context: ..
       dockerfile: docker/Dockerfile
 
-    image: kkhadka343/turtle-dev:latest
-    container_name: turtle-dev
+    image: kkhadka343/jazzy-base:latest
+    container_name: jazzy-base
 
     network_mode: host
     stdin_open: true

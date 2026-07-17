@@ -37,11 +37,4 @@ RUN echo "source /opt/ros/jazzy/setup.bash" >> /home/${USERNAME}/.bashrc
 RUN echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> /home/${USERNAME}/.bashrc
 
 WORKDIR /home/${USERNAME}/ros2_ws
-
-# Add the entrypoint script
-COPY ./docker/entrypoint.sh /entrypoint.sh
-RUN sudo chmod +x /entrypoint.sh
-
-# Set ENTRYPOINT and CMD
-ENTRYPOINT ["/entrypoint.sh"]
 CMD [ "/usr/bin/bash" ]
